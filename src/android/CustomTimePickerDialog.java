@@ -35,7 +35,7 @@ public class CustomTimePickerDialog extends TimePickerDialog {
     private final static int TIME_PICKER_INTERVAL = 15;
     private TimePicker timePicker;
     private final OnTimeSetListener callback;
-    private int _minute;
+    private  int _minute;
 
     /**
      * Creates a new time picker dialog.

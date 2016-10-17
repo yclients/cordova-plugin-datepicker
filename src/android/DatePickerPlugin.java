@@ -90,8 +90,8 @@ public class DatePickerPlugin extends CordovaPlugin {
 	private int timePickerMinute = 0;
 
 	private Runnable runnableTimeDialog(final DatePickerPlugin datePickerPlugin,
-			final int theme, final Context currentCtx, final CallbackContext callbackContext,
-			final JsonDate jsonDate, final Calendar calendarDate) {
+										final int theme, final Context currentCtx, final CallbackContext callbackContext,
+										final JsonDate jsonDate, final Calendar calendarDate) {
 		return new Runnable() {
 			@Override
 			public void run() {
@@ -171,34 +171,34 @@ public class DatePickerPlugin extends CordovaPlugin {
 			dateDialog.setTitle(jsonDate.titleText);
 		}
 		if (!jsonDate.todayText.isEmpty()){
-            dateDialog.setButton(DialogInterface.BUTTON_NEUTRAL, jsonDate.todayText, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                	Calendar now = Calendar.getInstance();
-                	DatePicker datePicker = dateDialog.getDatePicker();
+			dateDialog.setButton(DialogInterface.BUTTON_NEUTRAL, jsonDate.todayText, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Calendar now = Calendar.getInstance();
+					DatePicker datePicker = dateDialog.getDatePicker();
 					dateListener.onDateSet(datePicker, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH));
-                }
-            });
-        }
-		String labelCancel = jsonDate.cancelText.isEmpty() ? currentCtx.getString(android.R.string.cancel) : jsonDate.cancelText; 
+				}
+			});
+		}
+		String labelCancel = jsonDate.cancelText.isEmpty() ? currentCtx.getString(android.R.string.cancel) : jsonDate.cancelText;
 		dateDialog.setButton(DialogInterface.BUTTON_NEGATIVE, labelCancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
 				canceled = true;
 				callbackContext.error(RESULT_CANCEL);
-            }
-        });
+			}
+		});
 		String labelOk = jsonDate.okText.isEmpty() ? currentCtx.getString(android.R.string.ok) : jsonDate.okText;
 		dateDialog.setButton(DialogInterface.BUTTON_POSITIVE, labelOk, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
 				DatePicker datePicker = dateDialog.getDatePicker();
 				datePicker.clearFocus();
 				dateListener.onDateSet(datePicker, datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
-            }
-        });
-        
-        DatePicker dp = dateDialog.getDatePicker();
+			}
+		});
+
+		DatePicker dp = dateDialog.getDatePicker();
 		if(jsonDate.minDate > 0) {
 			dp.setMinDate(jsonDate.minDate);
 		}
@@ -206,9 +206,9 @@ public class DatePickerPlugin extends CordovaPlugin {
 			dp.setMaxDate(jsonDate.maxDate);
 		}
 	}
-	
+
 	private void prepareDialogPreHoneycomb(DatePickerDialog dateDialog,
-			final CallbackContext callbackContext, Context currentCtx, final JsonDate jsonDate){
+										   final CallbackContext callbackContext, Context currentCtx, final JsonDate jsonDate){
 		java.lang.reflect.Field mDatePickerField = null;
 		try {
 			mDatePickerField = dateDialog.getClass().getDeclaredField("mDatePicker");
@@ -231,28 +231,28 @@ public class DatePickerPlugin extends CordovaPlugin {
 		endDate.setTimeInMillis(jsonDate.maxDate);
 
 		final int minYear = startDate.get(Calendar.YEAR);
-	    final int minMonth = startDate.get(Calendar.MONTH);
-	    final int minDay = startDate.get(Calendar.DAY_OF_MONTH);
-	    final int maxYear = endDate.get(Calendar.YEAR);
-	    final int maxMonth = endDate.get(Calendar.MONTH);
-	    final int maxDay = endDate.get(Calendar.DAY_OF_MONTH);
+		final int minMonth = startDate.get(Calendar.MONTH);
+		final int minDay = startDate.get(Calendar.DAY_OF_MONTH);
+		final int maxYear = endDate.get(Calendar.YEAR);
+		final int maxMonth = endDate.get(Calendar.MONTH);
+		final int maxDay = endDate.get(Calendar.DAY_OF_MONTH);
 
 		if(startDate !=null || endDate != null) {
 			pickerView.init(jsonDate.year, jsonDate.month, jsonDate.day, new OnDateChangedListener() {
-                @Override
+				@Override
 				public void onDateChanged(DatePicker view, int year, int month, int day) {
-                	if(jsonDate.maxDate > 0 && jsonDate.maxDate > jsonDate.minDate) {
-	                	if(year > maxYear || month > maxMonth && year == maxYear || day > maxDay && year == maxYear && month == maxMonth){
-	                		view.updateDate(maxYear, maxMonth, maxDay);
-	                	}
-                	}
-                	if(jsonDate.minDate > 0) {
-	                	if(year < minYear || month < minMonth && year == minYear || day < minDay && year == minYear && month == minMonth) {
-	                		view.updateDate(minYear, minMonth, minDay);
-	                	}
-                	}
-            	}
-            });
+					if(jsonDate.maxDate > 0 && jsonDate.maxDate > jsonDate.minDate) {
+						if(year > maxYear || month > maxMonth && year == maxYear || day > maxDay && year == maxYear && month == maxMonth){
+							view.updateDate(maxYear, maxMonth, maxDay);
+						}
+					}
+					if(jsonDate.minDate > 0) {
+						if(year < minYear || month < minMonth && year == minYear || day < minDay && year == minYear && month == minMonth) {
+							view.updateDate(minYear, minMonth, minDay);
+						}
+					}
+				}
+			});
 		}
 	}
 
@@ -266,7 +266,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 			this.datePickerPlugin = datePickerPlugin;
 			this.callbackContext = callbackContext;
 			this.jsonDate = jsonDate;
-      this.theme = theme;
+			this.theme = theme;
 		}
 
 		/**
@@ -405,7 +405,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 					&& !object.isNull(key)
 					&& object.get(key).toString().length() > 0
 					&& !JSONObject.NULL.toString().equals(
-							object.get(key).toString());
+					object.get(key).toString());
 		}
 
 	}
