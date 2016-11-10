@@ -152,10 +152,19 @@
 }
 
 - (void)jsDateSelected {
-  NSTimeInterval seconds = [self.datePicker.date timeIntervalSince1970];
-  NSString *jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%f\");", seconds];
-    
-  [self.commandDelegate evalJs:jsCallback];
+    NSDateFormatter* df = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+
+    [df setLocale:enUSPOSIXLocale];
+    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    [df setTimeZone:[NSTimeZone localTimeZone]];
+
+    NSString* dateStrig = [df stringFromDate:self.datePicker.date];
+
+
+    NSString *jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%@\");", dateStrig];
+
+    [self.commandDelegate evalJs:jsCallback];
 }
 
 

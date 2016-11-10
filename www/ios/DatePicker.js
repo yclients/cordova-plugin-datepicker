@@ -111,7 +111,7 @@ DatePicker.prototype.show = function(options, cb) {
 };
 
 DatePicker.prototype._dateSelected = function(date) {
-    var d = new Date(parseFloat(date) * 1000);
+    var d = new Date(date);
     if (this._callback)
         this._callback(d);
 };
