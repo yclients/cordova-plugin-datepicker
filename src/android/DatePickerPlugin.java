@@ -1,33 +1,8 @@
-/**
- * @author Bikas Vaibhav (http://bikasv.com) 2013
- * Rewrote the plug-in at https://github.com/phonegap/phonegap-plugins/tree/master/Android/DatePicker
- * It can now accept `min` and `max` dates for DatePicker.
- *
- * @author Andre Moraes (https://github.com/andrelsmoraes)
- * Refactored code, changed default mode to show date and time dialog.
- * Added options `okText`, `cancelText`, `todayText`, `nowText`, `is24Hour`.
- *
- * @author Diego Silva (https://github.com/diego-silva)
- * Added option `titleText`.
- */
-
 package com.plugin.datepicker;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.TimeZone;
-import java.util.Random;
-
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -36,7 +11,18 @@ import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
 import android.widget.TimePicker;
-import com.plugin.datepicker.CustomTimePickerDialog;
+
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.Random;
+import java.util.TimeZone;
 
 @SuppressLint("NewApi")
 public class DatePickerPlugin extends CordovaPlugin {
