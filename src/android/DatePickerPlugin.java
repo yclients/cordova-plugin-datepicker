@@ -312,7 +312,7 @@ public class DatePickerPlugin extends CordovaPlugin {
 			calendarDate.set(Calendar.MINUTE, minute);
 			calendarDate.set(Calendar.SECOND, 0);
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.US);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ", Locale.US);
 			String toReturn = sdf.format(calendarDate.getTime());
 
 			callbackContext.success(toReturn);
