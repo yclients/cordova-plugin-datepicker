@@ -111,9 +111,12 @@ DatePicker.prototype.show = function(options, cb) {
 };
 
 DatePicker.prototype._dateSelected = function(date) {
-    var d = new Date(date);
-    if (this._callback)
-        this._callback(d);
+  var parser = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})(Z|\+[0-9]{2}:[0-9]{2})/i;
+  var result = parser.exec(date);
+
+  if (this._callback) {
+    this._callback(result);
+  }
 };
 
 DatePicker.prototype._dateSelectionCanceled = function() {

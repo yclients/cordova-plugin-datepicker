@@ -152,21 +152,18 @@
 }
 
 - (void)jsDateSelected {
-    NSDateFormatter* df = [[NSDateFormatter alloc] init];
-    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+  NSDateFormatter* df = [[NSDateFormatter alloc] init];
+  NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
 
-    [df setLocale:enUSPOSIXLocale];
-    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
-    [df setTimeZone:[NSTimeZone localTimeZone]];
+  [df setLocale:enUSPOSIXLocale];
+  [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"];
+  [df setTimeZone:[NSTimeZone localTimeZone]];
 
-    NSString* dateStrig = [df stringFromDate:self.datePicker.date];
+  NSString* dateStrig = [df stringFromDate:self.datePicker.date];
+  NSString *jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%@\");", dateStrig];
 
-
-    NSString *jsCallback = [NSString stringWithFormat:@"datePicker._dateSelected(\"%@\");", dateStrig];
-
-    [self.commandDelegate evalJs:jsCallback];
+  [self.commandDelegate evalJs:jsCallback];
 }
-
 
 #pragma mark - UIPopoverControllerDelegate methods
 

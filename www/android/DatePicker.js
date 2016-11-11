@@ -58,13 +58,10 @@ DatePicker.prototype.show = function(options, cb, errCb) {
 
 	var callback = function(message) {
 		if(message != 'error'){
-			var timestamp = Date.parse(message);
-			if(isNaN(timestamp) == false) {
-				cb(new Date(message));
-			}
-	        else {
-	            cb();
-	        }
+    var parser = /(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{3})(Z|\+[0-9]{2}:[0-9]{2})/i;
+    var result = parser.exec(message);
+
+	cb(result);
 		} else {
 			// TODO error popup?
     	}
